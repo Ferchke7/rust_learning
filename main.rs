@@ -5,7 +5,7 @@ fn main() {
 }
 struct Person { name: String, age: u8 }
 impl Person{
-    fn create(user_name: &str, user_age: u8) -> Person{
+    fn create(user_name: &str, user_age: u8) -> Self{
         Person{
             name: String::from(user_name),
             age: user_age
