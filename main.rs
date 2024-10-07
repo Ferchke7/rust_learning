@@ -3,21 +3,16 @@ fn main() {
         name: "Tom".to_string(),
         age: 36
     };
-    let bob = Person { name: "Bob".to_string(), age: 41 };
-    let is_older = tom.is_older(&bob);
-    if is_older{
-        println!("STARSHE");
-    }
-    else {
-        println!("ISMAIL PETUH");
-    }
+    println!("Do izmenenie {}", tom.age);
+    tom.change_age(22);
+    println!("Posle izmenenie {}", tom.age)
 }
 struct Person {
     name: String,
     age: u8
 }
 impl Person {
-    fn is_older(&mut self, other: &Person) -> bool {
-        self.age > other.age
+    fn change_age(&mut self, age: u8) {
+        self.age = age;
     }
 }
