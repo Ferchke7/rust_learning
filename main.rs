@@ -1,18 +1,14 @@
 fn main() {
-    let mut tom = Person{
-        name: "Tom".to_string(),
-        age: 36
-    };
-    println!("Do izmenenie {}", tom.age);
-    tom.change_age(22);
-    println!("Posle izmenenie {}", tom.age)
+    let tom = Person::create("Tom", 36);
+    println!("Name {} Age {}", tom.name, tom.age);
+    
 }
-struct Person {
-    name: String,
-    age: u8
-}
-impl Person {
-    fn change_age(&mut self, age: u8) {
-        self.age = age;
+struct Person { name: String, age: u8 }
+impl Person{
+    fn create(user_name: &str, user_age: u8) -> Person{
+        Person{
+            name: String::from(user_name),
+            age: user_age
+        }
     }
 }
