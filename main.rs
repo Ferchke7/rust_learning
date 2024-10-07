@@ -9,7 +9,7 @@ trait Printer{
 }
 impl Printer for Person {
     
-    fn preview(&self) -> String {
-        format!("preview Person {}, age {}", self.name, self.age);
+    fn preview(&self) -> String{
+        format!("[Предпросмотр] Person {}; age: {}", self.name, self.age)
     }
 }
