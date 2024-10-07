@@ -1,14 +1,13 @@
 fn main() {
-    let tom = Person::create("Tom", 36);
-    println!("Name {} Age {}", tom.name, tom.age);
-    
+    let tom = Person { name: String::from("Tom"), age: 36 };
+    tom.print();
 }
 struct Person { name: String, age: u8 }
-impl Person{
-    fn create(user_name: &str, user_age: u8) -> Self{
-        Person{
-            name: String::from(user_name),
-            age: user_age
-        }
+trait Printer{
+    fn print(&self);
+}
+impl Printer for Person {
+    fn print(&self) {
+        println!("Person {}; age {}", self.name, self.age);
     }
 }
