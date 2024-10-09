@@ -7,6 +7,11 @@ impl<T> Person<T>{
         &self.id
     }
 }
+impl Person<u32>{
+    fn compare_id(&self, user_id: u32) -> bool{
+        self.id == user_id
+    }
+}
 fn main() {
     let user = Person {id: "be something", name: String::from("1") };
     
