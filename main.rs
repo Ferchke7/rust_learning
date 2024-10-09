@@ -13,7 +13,11 @@ impl Sender for Message{
     }
 }
 
-fn process(obj: &(impl Printer + Sender)) {
+// fn process(obj: &(impl Printer + Sender)) {
+//     obj.print();
+//     obj.send();
+// }
+fn process<T>(obj: &T) where T: Printer + Sender{
     obj.print();
     obj.send();
 }
