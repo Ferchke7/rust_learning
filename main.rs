@@ -1,27 +1,32 @@
-trait Printer { fn print(&self); }
-trait Sender { fn send(&self); }
+struct Person<T>{ device: T }
 
-struct Message { text: String }
-impl Printer for Message{
-    fn print(&self){
-        println!("message: {}", self.text);
+impl<T:Sender + Printer> Person<T> {
+    fn send_message(&self, message: &str) {
+        self.device.print(message);
+        self.device.send(message);
     }
 }
-impl Sender for Message{
-    fn send(&self){
-        println!("sent ^^");
+trait Printer { fn print(&self, message: &str); }
+trait Sender { fn send(&self, message: &str); }
+
+struct Smartphone {
+
+}
+
+impl Printer for Smartphone{
+    fn print(&self, message: &str) {
+        println!("{}", message);
     }
 }
 
-// fn process(obj: &(impl Printer + Sender)) {
-//     obj.print();
-//     obj.send();
-// }
-fn process<T>(obj: &T) where T: Printer + Sender{
-    obj.print();
-    obj.send();
+impl Sender for Smartphone{
+    fn send(&self, message: &str){
+        println!("Message sent {}", message);
+    }
 }
+
 fn main() {
-    let mes = Message { text: String::from("Hello")};
-    process(&mes);
+    let iphone = Smartphone{};
+    let tom = Person{ device: iphone };
+    tom.send_message("hello");
 }
