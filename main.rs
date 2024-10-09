@@ -20,6 +20,7 @@ impl Shape for Rectangle{
 }
 
 fn main() {
+    //TODO look up tmrw
     let mut my_shape: &dyn Shape = &Circle { radius: 5.0 }; //decide what trait object save a link to the address
     println!("Circle, {}", my_shape.area());
 
