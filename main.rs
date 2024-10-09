@@ -1,17 +1,23 @@
-struct Person<T>{
-  
-    id: T,
-    name: String
-}
-impl<T> Person<T>{
-       
-    fn clone_with_name<V>(&self, person_id: V) -> Person<V>{
-        Person{ id: person_id, name: self.name.clone()}
+trait Printer { fn print(&self); }
+trait Sender { fn send(&self); }
+
+struct Message { text: String }
+impl Printer for Message{
+    fn print(&self){
+        println!("message: {}", self.text);
     }
 }
-fn main(){
-      
-    let tom = Person{id:1, name: String::from("Tom")};
-    let tom2 = tom.clone_with_name("235qwerty");
-    println!("Tom2 Info. Id: {}  Name: {}", tom2.id, tom2.name); // Tom2 Info. Id: 235qwerty  Name: Tom
+impl Sender for Message{
+    fn send(&self){
+        println!("sent ^^");
+    }
+}
+
+fn process(obj: &(impl Printer + Sender)) {
+    obj.print();
+    obj.send();
+}
+fn main() {
+    let mes = Message { text: String::from("Hello")};
+    process(&mes);
 }
