@@ -1,12 +1,12 @@
-// &i32        // обычная ссылка
-// &'a i32     // ссылка с указанным временем жизни
-// &'a mut i32 // изменяемая ссылка с указанным временем жизни
-
 fn main() {
-    let message = get_message();
-    println!("message: {}", message);
+    let username = String::from("Sam");
+    {
+        let default_name = String::from("Tom");
+        let checked_username = check_name(&username, &default_name);
+        println!("username {}", checked_username);
+    }
 }
-
-fn get_message<'a>() -> &'a str {
-    "hello"
+fn check_name<'a>(name: &'a str, default: &'a str) -> &'a str {
+    if name == "admin" {default}
+    else {name}
 }
