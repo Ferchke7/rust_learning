@@ -1,24 +1,60 @@
-//Conditional conformance
-trait Convertible<T> {
-    fn convert(&self) -> T;
+// трейт персонажа в игре
+trait Character {
+    type WeaponType: Weapon;    // оружие, ассоциированое с персонажем
+    // метод создания оружия, которое ассоциировано с персонажем
+    fn create_weapon() -> Self::WeaponType;
 }
-struct Celsius(f64);
-struct Fahrenheit(f64);
-
-impl Convertible<Fahrenheit> for Celcius{
-    fn convert(&self) -> Fahrenheit {
-        Fahrenheit(self.0 * 1.8 + 32.0)
+ 
+// трейт оружия
+trait Weapon {
+    fn attack(&self);
+}
+ 
+// структура воина
+struct Warrior;
+// структура мага
+struct Mage;
+ 
+// структура, которая представляет меч
+struct Sword;
+// структура, которая представляет посох
+struct Staff;
+ 
+// реализация меча
+impl Weapon for Sword {
+    fn attack(&self) {
+        println!("Атакуем мечом");
     }
 }
-
-impl Convertible<Celcius> for Fahrenheit{
-    fn convert(&self) -> Celcius {
-        Celcius((self.0 - 32.0) / 1.8)
+ 
+// реализация для посоха
+impl Weapon for Staff {
+    fn attack(&self) {  
+        println!("Применяем магию");
     }
 }
+ 
+// реализация воина
+impl Character for Warrior { 
+    type WeaponType = Sword;    // оружие - меч
+    // создаем меч
+    fn create_weapon() -> Self::WeaponType { Sword }
+}
+ 
+// реализация мага
+impl Character for Mage {
+    type WeaponType = Staff;    // оружие - магический посох
+    // создаем посох
+    fn create_weapon() -> Self::WeaponType { Staff }
+}
+ 
+// программирование на уровне типа
+fn attack<C: Character>() {
+    let weapon = C::create_weapon(); // создаем оружие ассоциированного типа
+    weapon.attack();  // применяем оружие
+}
+ 
 fn main() {
-    let celsius = Celcius(100.0);
-
-    let converted_fahrenheit: Fahrenheit = celsius.convert();
-    println!("100 in fahrenheit is {:.2}", converted_fahrenheit.0)
+    attack::<Warrior>();
+    attack::<Mage>();
 }
