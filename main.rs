@@ -1,9 +1,8 @@
 use std::collections::HashMap;
 
 fn main() {
-    let people = HashMap::from([
-        ("Alice",35),
-        ("Tom", 39)
-    ]);
-    println!("{:?}", people);
+    let raw_data = vec![ ("Alice", 35), ("Tom", 39) ];
+    let people: HashMap<_,_> = raw_data.iter().cloned().collect();
+
+    println!("{:?}",people);
 }
