@@ -1,20 +1,17 @@
 struct Person<T>{
- 
+  
     id: T,
     name: String
 }
-impl Person<u32>{
-    fn compare_id(&self, user_id: u32) -> bool{
-        self.id == user_id
+impl<T> Person<T>{
+       
+    fn clone_with_name<V>(&self, person_id: V) -> Person<V>{
+        Person{ id: person_id, name: self.name.clone()}
     }
 }
 fn main(){
-     
+      
     let tom = Person{id:1, name: String::from("Tom")};
-    let result1 = tom.compare_id(1);
-    println!("result1: {}", result1);   // result1: true
-     
-    let bob = Person{id:4, name: String::from("Bob")};
-    let result2 = bob.compare_id(1);
-    println!("result2: {}", result2);   // result2: false
+    let tom2 = tom.clone_with_name("235qwerty");
+    println!("Tom2 Info. Id: {}  Name: {}", tom2.id, tom2.name); // Tom2 Info. Id: 235qwerty  Name: Tom
 }
