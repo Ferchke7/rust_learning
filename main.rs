@@ -1,10 +1,17 @@
-fn main() {
-    let results1 = receive(3);
-    println!("{}", results1);
-
-    let results2 = receive("somet");
-    println!("{}", results2);
+struct Person<T>{
+    id: T,
+    name: String
 }
-fn receive<T>(item: T) -> T{
-    item
+impl<T> Person<T>{
+    fn get_id(&self) -> &T{
+        &self.id
+    }
+}
+fn main() {
+    let user = Person {id: "be something", name: String::from("1") };
+    
+    let anotherUser = Person {id: 1, name: "Tom".to_string() };
+    println!("{}",user.get_id());
+    println!("{}",anotherUser.get_id());
+    
 }
