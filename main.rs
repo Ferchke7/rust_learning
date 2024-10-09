@@ -1,16 +1,10 @@
+struct Person<T> {
+    id: T,
+    name: String
+}
+
 fn main() {
-    let tom = Person{ name: String::from("Tom"), age: 36 };
-    let tom_preview = tom.preview();
-    println!("{}", tom_preview);
-}
-struct Person { name: String, age: u8 }
+    let tom = Person { id: 245, name: "Tom".to_string() };
+    println!("id: {} name {}", tom.id, tom.name);
 
-trait Printer{
-    fn preview(&self) -> String;
-}
-
-impl Printer for Person {
-    fn preview(&self) -> String{
-        format!("[Preview] Person {}; age {}",self.name, self.age)
-    }
 }
