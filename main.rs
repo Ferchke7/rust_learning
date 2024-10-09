@@ -1,30 +1,24 @@
-trait Shape{
-    fn area(&self) -> f64;
+//Conditional conformance
+trait Convertible<T> {
+    fn convert(&self) -> T;
 }
-struct Circle{
-    radius: f64
-}
-struct Rectangle{
-    width: f64,
-    height: f64
-}
-impl Shape for Circle {
-    fn area(&self) -> f64 {
-        self.radius * self.radius * 3.14
-    }
-}
-impl Shape for Rectangle{
-    fn area(&self) -> f64 {
-        self.width * self.height
+struct Celsius(f64);
+struct Fahrenheit(f64);
+
+impl Convertible<Fahrenheit> for Celcius{
+    fn convert(&self) -> Fahrenheit {
+        Fahrenheit(self.0 * 1.8 + 32.0)
     }
 }
 
+impl Convertible<Celcius> for Fahrenheit{
+    fn convert(&self) -> Celcius {
+        Celcius((self.0 - 32.0) / 1.8)
+    }
+}
 fn main() {
-    //TODO look up tmrw
-    let mut my_shape: &dyn Shape = &Circle { radius: 5.0 }; //decide what trait object save a link to the address
-    println!("Circle, {}", my_shape.area());
+    let celsius = Celcius(100.0);
 
-    my_shape = &Rectangle { width: 10.0, height: 20.0 };
-    println!("Rectangle {}", my_shape.area());
-
+    let converted_fahrenheit: Fahrenheit = celsius.convert();
+    println!("100 in fahrenheit is {:.2}", converted_fahrenheit.0)
 }
