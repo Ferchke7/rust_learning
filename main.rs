@@ -1,32 +1,34 @@
-struct Person<T>{ device: T }
-
-impl<T:Sender + Printer> Person<T> {
-    fn send_message(&self, message: &str) {
-        self.device.print(message);
-        self.device.send(message);
+truct Message { text: String}
+struct Person { name: String}
+ 
+trait Printer{  fn print(&self); }
+  
+impl Printer for Message{
+    fn print(&self){
+        println!("Message text: {}", self.text);
     }
 }
-trait Printer { fn print(&self, message: &str); }
-trait Sender { fn send(&self, message: &str); }
-
-struct Smartphone {
-
-}
-
-impl Printer for Smartphone{
-    fn print(&self, message: &str) {
-        println!("{}", message);
+ 
+impl Printer for Person{
+    fn print(&self){
+        println!("Person name: {}", self.name);
     }
 }
-
-impl Sender for Smartphone{
-    fn send(&self, message: &str){
-        println!("Message sent {}", message);
+ 
+trait ConsolePrinter{  fn console_print(&self); }
+impl<T:Printer> ConsolePrinter for T{
+    fn console_print(&self){
+        println!("******Печать на консоль*****");
+        self.print();
+        println!(); // для отделения строк при выводе на консоль
     }
 }
-
-fn main() {
-    let iphone = Smartphone{};
-    let tom = Person{ device: iphone };
-    tom.send_message("hello");
+ 
+fn main(){
+      
+    let mes = Message {text: String::from("Hello METANIT.COM")};
+    mes.console_print();
+ 
+    let tom = Person{name: String::from("Tom")};
+    tom.console_print();
 }
