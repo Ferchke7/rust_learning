@@ -1,15 +1,17 @@
-enum DayTime<T>{
-      
-    Morning(T),
-    Evening(T)
+struct Circle {
+    radius: f64,
 }
- 
-fn main(){
-     
-    let morning = DayTime::Morning("Доброе утро".to_string());  // параметр T представляет тип String
-    if let DayTime::Morning(morning_value)= morning { println!("Morning: {}", morning_value);}
-     
-      
-    let evening = DayTime::Evening(16);     // параметр T представляет тип i32
-    if let DayTime::Evening(evening_value)= evening { println!("Evening: {}", evening_value);}
+trait Drawable<T> {
+    fn draw(&self, figure:&T);
+}
+struct CircleGui;
+impl Drawable<Circle> for CircleGui{
+    fn draw(&self, figure: &Circle){
+        println!("Draw a circle {}", figure.radius);
+    }
+}
+fn main() {
+    let gui = CircleGui{};
+    let circle = Circle { radius: 2.0 };
+    gui.draw(&circle);
 }
