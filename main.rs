@@ -5,5 +5,5 @@ struct Person {
 }
 fn main() {
     let tom = Person{name:"Tom".to_string(), age: 40};
-    println!("{:?}", tom);
+    dbg!(&tom);
 }
