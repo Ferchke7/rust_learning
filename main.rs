@@ -1,8 +1,5 @@
-use std::collections::HashMap;
-
 fn main() {
-    let raw_data = vec![ ("Alice", 35), ("Tom", 39) ];
-    let people: HashMap<_,_> = raw_data.iter().cloned().collect();
-
-    println!("{:?}",people);
+    let numbers = [1,2,3,4,5,6,7];
+    let slice = &numbers[1..5];
+    println!("{:?}", slice);
 }
