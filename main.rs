@@ -1,9 +1,12 @@
-#[derive(Debug)]
-struct Person {
-    name: String,
-    age: u8
-}
+// &i32        // обычная ссылка
+// &'a i32     // ссылка с указанным временем жизни
+// &'a mut i32 // изменяемая ссылка с указанным временем жизни
+
 fn main() {
-    let tom = Person{name:"Tom".to_string(), age: 40};
-    dbg!(&tom);
+    let message = get_message();
+    println!("message: {}", message);
+}
+
+fn get_message<'a>() -> &'a str {
+    "hello"
 }
